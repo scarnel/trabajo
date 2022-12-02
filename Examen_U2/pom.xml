@@ -62,7 +62,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>pe.edu.upeu.Examen_U2</mainClass>
+                            <mainClass>pe.edu.upeu.examen_u2.Examen_U2</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

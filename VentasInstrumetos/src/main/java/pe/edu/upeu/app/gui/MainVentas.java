@@ -72,24 +72,7 @@ public class MainVentas extends javax.swing.JPanel {
                     //txtAutoCompDNI.setText(AutoCompleteTextField.dataGetReturnet.getIdx());
                     txtNombreCliente.setText(AutoCompleteTextField.dataGetReturnet.getNombreDysplay());
                     listarCarrito(txtAutoCompDNI.getText());
-                    /*
-                    if (ModeloDataAutocomplet.TIPE_DISPLAY.equals("ID") && txtAutoCompDNI.getText().equals(AutoCompleteTextField.dataGetReturnet.getIdx())) {
-                        txtNombreCliente.setText(AutoCompleteTextField.dataGetReturnet.getNombreDysplay());
-                    } else if (ModeloDataAutocomplet.TIPE_DISPLAY.equals("NAME")
-                            && txtAutoCompDNI.getText().equals(AutoCompleteTextField.dataGetReturnet.getNombreDysplay())) {
-                        txtNombreCliente.setText(AutoCompleteTextField.dataGetReturnet.getIdx());
-                    } else if (ModeloDataAutocomplet.TIPE_DISPLAY.equals("OTHER")
-                            && txtAutoCompDNI.getText().equals(AutoCompleteTextField.dataGetReturnet.getOtherData())) {
-                        System.out.println("Valor:" + txtAutoCompDNI.getText());
-                        System.out.println("Valor:" + AutoCompleteTextField.dataGetReturnet.getIdx() + "\tContenido:"
-                                + AutoCompleteTextField.dataGetReturnet.getNombreDysplay());
-                        txtNombreCliente.setText(AutoCompleteTextField.dataGetReturnet.getIdx());
-                    } else {
-                        System.out.println("Valor:" + txtAutoCompDNI.getText());
-                        txtNombreCliente.setText("");
-                    }
-                     */
-
+                    
                 }
             }
         });
@@ -138,7 +121,7 @@ public class MainVentas extends javax.swing.JPanel {
         column.setCellEditor(be);
         modelo.setNumRows(0);
         Object[] ob = new Object[9];
-        double impoTotal = 0, igv = 0;
+        double impoTotal = 0, igv = 0, des = 0;
         for (int i = 0; i < listarCleintes.size(); i++) {
             int x = -1;
             ob[++x] = listarCleintes.get(i).getIdCarrito();
@@ -174,6 +157,7 @@ public class MainVentas extends javax.swing.JPanel {
         double pv = impoTotal / 1.18;
         txtPrecioB.setText(String.valueOf(Math.round(pv * 100.0) / 100.0));
         txtIgv.setText(String.valueOf(Math.round((pv * 0.18) * 100.0) / 100.0));
+        
         return listarCleintes;
     }
 
@@ -218,6 +202,7 @@ public class MainVentas extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtPrecioTotal = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -231,11 +216,13 @@ public class MainVentas extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         txtImporteTotal = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 255, 0));
 
+        jLabel1.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel1.setText("DNI/RUC Cliente:");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add-contact-icon.png"))); // NOI18N
@@ -246,6 +233,7 @@ public class MainVentas extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel2.setText("Nombre/Razon Social:");
 
         txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -285,19 +273,23 @@ public class MainVentas extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAutoCompDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1320, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1320, 70));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 0));
 
+        jLabel4.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel4.setText("Producto:");
 
+        jLabel5.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel5.setText("Codigo:");
 
+        jLabel6.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel6.setText("Stock:");
 
+        jLabel7.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel7.setText("Cantidad:");
 
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
@@ -311,8 +303,10 @@ public class MainVentas extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel8.setText("P. Unit:");
 
+        jLabel9.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel9.setText("P.Total:");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data-add-icon.png"))); // NOI18N
@@ -322,6 +316,8 @@ public class MainVentas extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/instrument.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -350,11 +346,14 @@ public class MainVentas extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(39, 39, 39)
-                .addComponent(jButton2)
-                .addContainerGap(417, Short.MAX_VALUE))
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,18 +373,17 @@ public class MainVentas extends javax.swing.JPanel {
                     .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                    .addComponent(txtPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 103, 1320, -1));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 83, 1320, 120));
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 51, 0));
 
+        jTable1.setBackground(new java.awt.Color(255, 102, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -407,22 +405,26 @@ public class MainVentas extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 197, 1320, 340));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 207, 1320, 330));
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(204, 0, 102));
 
+        jLabel10.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel10.setText("Precio Venta:");
 
+        jLabel11.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel11.setText("IGV:");
 
+        jLabel12.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel12.setText("Descuento:");
 
+        jLabel13.setFont(new java.awt.Font("Sitka Small", 2, 14)); // NOI18N
         jLabel13.setText("P. Total S/:");
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/shop-cart-add-icon.png"))); // NOI18N
@@ -432,6 +434,8 @@ public class MainVentas extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/teclado (2).jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -456,7 +460,9 @@ public class MainVentas extends javax.swing.JPanel {
                     .addComponent(jLabel13))
                 .addGap(47, 47, 47)
                 .addComponent(jButton3)
-                .addContainerGap(621, Short.MAX_VALUE))
+                .addGap(207, 207, 207)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,7 +484,8 @@ public class MainVentas extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 1320, 90));
@@ -607,7 +614,9 @@ public class MainVentas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

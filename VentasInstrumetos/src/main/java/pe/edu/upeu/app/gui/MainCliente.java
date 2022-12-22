@@ -137,7 +137,7 @@ public class MainCliente extends javax.swing.JPanel {
         });
 
         jLabel7.setFont(new java.awt.Font("Serif", 3, 70)); // NOI18N
-        jLabel7.setText("SCAR");
+        jLabel7.setText("BLUE");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/musiccc.png"))); // NOI18N
         jLabel6.setText("jLabel6");

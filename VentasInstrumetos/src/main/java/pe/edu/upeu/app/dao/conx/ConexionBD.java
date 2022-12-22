@@ -13,7 +13,11 @@ import java.sql.SQLException;
  * @author AVATEC
  */
 public class ConexionBD {
-     public static String url = "jdbc:sqlite:data/db_ventas.db";
+
+    /**
+     *
+     */
+    public static String url = "jdbc:sqlite:data/db_ventas.db";
     public static String Usuario = "proyecto";
     public static String Contraseña = "proyecto1";
     public static String clase = "org.sqlite.JDBC";

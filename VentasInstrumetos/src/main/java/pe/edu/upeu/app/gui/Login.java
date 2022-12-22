@@ -8,9 +8,15 @@ import java.awt.Dimension;
 import java.awt.*;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import pe.edu.upeu.app.components.FondoPanel;
+import pe.edu.upeu.app.dao.conx.Conn;
+import pe.edu.upeu.app.modelo.UsuarioTO;
 import pe.edu.upeu.app.util.UtilsX;
 
 /**
@@ -22,13 +28,17 @@ public class Login extends javax.swing.JFrame {
     BufferedImage image;
     UtilsX obj = new UtilsX();
     Image imagex;
+    Connection connection = Conn.connectSQLite();
+    static PreparedStatement ps;
+    ResultSet rs = null;
+    
     public Login() {
         
         
         initComponents();
 
         
-        this.setTitle("Login");
+        this.setTitle("Login ventas");
         try {
             image = ImageIO.read(obj.getFile("instruments.jpg"));
         } catch (Exception ex) {
@@ -45,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         lbnImage.setIcon(new ImageIcon(scaleImage));
         this.repaint();
     }
-
+    UsuarioTO uTO = new UsuarioTO();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,6 +69,8 @@ public class Login extends javax.swing.JFrame {
         panelBorder1 = new pe.edu.upeu.app.components.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         myButton1 = new pe.edu.upeu.app.components.MyButton();
+        txtUsuario = new javax.swing.JTextField();
+        txtClave = new javax.swing.JPasswordField();
         lbnImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,6 +98,14 @@ public class Login extends javax.swing.JFrame {
         myButton1.setBounds(10, 40, 130, 22);
 
         jPanel2.add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 154, 80));
+
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 150, 30));
+        jPanel2.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 112, 150, 30));
         jPanel2.add(lbnImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 290));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,10 +130,52 @@ public class Login extends javax.swing.JFrame {
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
         // TODO add your handling code here:
-        GUIMain gm=new GUIMain();
+        /*String busqueda_usuario = uTO.BuscarUsuarioRegistrado(txtUsuario.getText(), txtClave.getText());
+
+        if (txtUsuario.getText().equals("root") && txtClave.getText().equals("root")) {
+            JOptionPane.showMessageDialog(this, "Bienvenido iniciaste como root (Administrador)");
+            GUIMain gm=new GUIMain();
         gm.setVisible(true);
         this.dispose();
+        } else if (busqueda_usuario.equals("Usuario encontrado")) {
+            String busqueda_nombre = uTO.buscarnombre(txtUsuario.getText());
+
+            GUIMain gm=new GUIMain();
+        gm.setVisible(true);
+        this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario no registrado");
+        }*/
+                String uname = txtUsuario.getText();
+                String pword = txtClave.getText();
+        if (uname.equals("") || pword.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Ocurrio un error", "UPS¡", 1);
+
+        } else {
+            try {
+                connection = Conn.connectSQLite();
+                ps = connection.prepareStatement("SELECT * FROM usuario WHERE user=? and clave=?");
+
+                ps.setString(1, uname);
+                ps.setString(2, pword);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    GUIMain guiMain = new GUIMain();
+                    guiMain.setVisible(true);
+                    this.dispose();
+                }
+
+            } catch (Exception ex) {
+                System.out.println("" + ex);
+            }
+        }
+       
     }//GEN-LAST:event_myButton1ActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,5 +187,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lbnImage;
     private pe.edu.upeu.app.components.MyButton myButton1;
     private pe.edu.upeu.app.components.PanelBorder panelBorder1;
+    private javax.swing.JPasswordField txtClave;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
